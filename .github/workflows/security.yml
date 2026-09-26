@@ -1,0 +1,51 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: '0 0 * * 0'  # weekly
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - name: npm audit
+        working-directory: server
+        run: npm audit --omit=dev --audit-level=high
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: cli/go.mod
+      - name: govulncheck
+        working-directory: cli
+        run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+
+  codeql:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    strategy:
+      matrix:
+        language: [ javascript, go ]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        if: matrix.language == 'go'
+        with:
+          go-version-file: cli/go.mod
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+      - uses: github/codeql-action/autobuild@v3
+        if: matrix.language == 'go'
+        with:
+          working-directory: cli
+      - uses: github/codeql-action/analyze@v3

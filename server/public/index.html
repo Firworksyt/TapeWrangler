@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TapeWrangler</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#946caa">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a href="#/" class="brand" aria-label="TapeWrangler home">
+        <img src="logo.png" alt="" width="53" height="34">
+        <span>TapeWrangler</span>
+      </a>
+      <form id="search-form" class="search" role="search">
+        <input id="search-input" type="search" placeholder="Search file and folder names across all tapes…" autocomplete="off" spellcheck="false">
+      </form>
+    </div>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#/" data-tab="search">Search</a>
+      <a href="#/tapes" data-tab="tapes">Tapes</a>
+      <a href="#/locations" data-tab="locations">Locations</a>
+      <a href="#/single-copy" data-tab="single-copy">Single copy</a>
+    </nav>
+  </header>
+
+  <section id="stats" class="stats" aria-label="Catalog totals"></section>
+
+  <main id="view" tabindex="-1"></main>
+
+  <footer class="foot"><span id="version"></span></footer>
+
+  <dialog id="dialog">
+    <form method="dialog" id="dialog-form">
+      <h2 id="dialog-title"></h2>
+      <div id="dialog-body"></div>
+      <p class="error" id="dialog-error" hidden></p>
+      <div class="dialog-actions">
+        <button value="cancel" formnovalidate class="btn">Cancel</button>
+        <button value="ok" class="btn primary" id="dialog-ok">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+node_modules
+data/
+*.db
+*.log
+test/
+eslint.config.js
+Dockerfile
+.dockerignore
+*.md

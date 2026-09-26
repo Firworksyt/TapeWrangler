@@ -1,0 +1,38 @@
+# TapeWrangler server, plus watchtower to keep it on the latest image.
+#
+#   cp .env.example .env     # then set TAPEWRANGLER_TOKEN
+#   mkdir -p data && sudo chown 1000:1000 data
+#   docker compose up -d
+
+services:
+  tapewrangler:
+    image: ghcr.io/firworksyt/tapewrangler:latest
+    # To build from this checkout instead of pulling:
+    # build: ./server
+    container_name: tapewrangler
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      TAPEWRANGLER_TOKEN: ${TAPEWRANGLER_TOKEN:?Set TAPEWRANGLER_TOKEN in .env}
+      BACKUP_INTERVAL_HOURS: ${BACKUP_INTERVAL_HOURS:-24}
+      BACKUP_KEEP: ${BACKUP_KEEP:-14}
+    volumes:
+      - ./data:/app/data   # database + backups/ live here
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+
+  # Remove this service if the VM already runs watchtower. Use the same image
+  # you run for PortfolioWrangler: containrrr/watchtower was archived in
+  # December 2025 and may need DOCKER_API_VERSION set on newer Docker engines.
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_LABEL_ENABLE: "true"   # only update containers labeled above
+      WATCHTOWER_CLEANUP: "true"        # delete old images after updating
+      WATCHTOWER_POLL_INTERVAL: "300"   # check GHCR every 5 minutes
+      # DOCKER_API_VERSION: "1.44"      # uncomment if it logs "client version is too old"

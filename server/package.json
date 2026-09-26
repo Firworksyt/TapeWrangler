@@ -1,0 +1,26 @@
+{
+  "name": "tapewrangler-server",
+  "version": "0.1.0",
+  "description": "Catalog of what is stored on which LTO tape",
+  "private": true,
+  "license": "WTFPL",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "DATA_DIR=./data node --watch src/server.js",
+    "test": "node --test \"test/**/*.test.js\"",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0"
+  }
+}
