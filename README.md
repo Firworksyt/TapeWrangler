@@ -7,7 +7,7 @@ on which tape and which tape is on which shelf, and gives you one search box
 across all of them.
 
 The intent is to help organize and search through archived data.
-This is NOT a backup system: the server never touches a tape drive.
+This is NOT a comprehensive backup system: the server never touches a tape drive. The CLI can but it's roughly equivalent to a cp or rsync with some additional metadata handling.
 
 Write tapes however you like (`cp`, `rsync`, `tar`, the included CLI), then
 send the file list to the server.
