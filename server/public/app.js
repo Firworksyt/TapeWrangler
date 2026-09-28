@@ -430,8 +430,11 @@ async function renderTape(barcode, params) {
 
   view.innerHTML = `
     <div class="view-head">
-      <div><h1><span class="barcode">${esc(t.barcode)}</span> ${esc(t.name || '')}</h1>
-        <div class="sub">${statusChip(t.status)} ${esc(t.generation)} · ${esc(t.location || 'no location')}</div></div>
+      <div class="tape-title">
+        <span class="barcode">${esc(t.barcode)}</span>
+        <h1>${esc(t.name || 'Untitled')}</h1>
+        <div class="sub">${statusChip(t.status)} ${esc(t.generation)} · ${esc(t.location || 'no location')}</div>
+      </div>
       <div class="btn-row">
         <button class="btn" id="edit-tape">Edit</button>
         <button class="btn danger" id="delete-tape">Delete</button>
