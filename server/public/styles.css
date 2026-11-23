@@ -160,6 +160,23 @@ main {
   margin-bottom: 16px;
 }
 .view-head .sub { color: var(--muted); margin-top: 2px; }
+.tape-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+.tape-title h1 {
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.tape-title .barcode {
+  font-size: 0.95rem;
+}
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
