@@ -6,6 +6,10 @@ A self-hosted catalog of what's on your LTO tapes. It records which files are
 on which tape and which tape is on which shelf, and gives you one search box
 across all of them.
 
+[![CI](https://github.com/Firworksyt/TapeWrangler/actions/workflows/ci.yml/badge.svg)](https://github.com/Firworksyt/TapeWrangler/actions/workflows/ci.yml)
+[![Security Scan](https://github.com/Firworksyt/TapeWrangler/actions/workflows/security.yml/badge.svg)](https://github.com/Firworksyt/TapeWrangler/actions/workflows/security.yml)
+[![Docker Image](https://github.com/Firworksyt/TapeWrangler/actions/workflows/docker.yml/badge.svg)](https://github.com/Firworksyt/TapeWrangler/actions/workflows/docker.yml)
+
 The intent is to help organize and search through archived data.
 This is NOT a comprehensive backup system: the server never touches a tape drive. The CLI can but it's roughly equivalent to a cp or rsync with some additional metadata handling.
 
